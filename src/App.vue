@@ -9,13 +9,13 @@
       <div class="player">
         <h2>Player 1</h2>
         <div class="score">{{ player1 }}</div>
-        <button @click="addPoint(1)">+1</button>
+        <button @click="addPoint(1)" :disabled="gameOver">+1</button>
       </div>
 
       <div class="player">
         <h2>Player 2</h2>
         <div class="score">{{ player2 }}</div>
-        <button @click="addPoint(2)">+1</button>
+        <button @click="addPoint(2)" :disabled="gameOver">+1</button>
       </div>
     </section>
 
@@ -39,14 +39,43 @@ export default {
     return {
       player1: 0,
       player2: 0,
-
-      // !add rules
-      statusMessage: "Playing…",
     }
+  },
+  computed: {
+    isDraw() {
+      // Rule for 11:11
+      return this.player1 === 11 && this.player2 === 11
+    },
+
+    winner() {
+      // Rule for 6 points + min 2 difference
+      const p1Wins = this.player1 >= 6 && this.player1 - this.player2 >= 2
+      const p2Wins = this.player2 >= 6 && this.player2 - this.player1 >= 2
+
+      if (p1Wins) return "Player 1"
+      if (p2Wins) return "Player 2"
+
+      // no winner yet
+      return null
+    },
+
+    gameOver() {
+      // endof game in case of winner or draw
+      return this.winner !== null || this.isDraw
+    },
+
+    statusMessage() {
+      if (this.winner) return `Vinder: ${this.winner}`
+      if (this.isDraw) return "Uafgjort (11–11). Game over."
+      return "Kampen er i gang..."
+    },
   },
 
   methods: {
     addPoint(playerNumber) {
+      // stop scoring if game ended
+      if (this.gameOver) return
+
       // add point
       if (playerNumber === 1) this.player1++
       if (playerNumber === 2) this.player2++
@@ -55,7 +84,6 @@ export default {
     resetGame() {
       this.player1 = 0
       this.player2 = 0
-      this.statusMessage = "Playing…"
     },
   },
 }
@@ -102,5 +130,10 @@ button {
 
 .reset {
   margin-top: 6px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
