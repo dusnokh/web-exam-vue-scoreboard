@@ -6,17 +6,19 @@
 
     <!-- score boxes -->
     <section class="board">
-      <div class="player">
-        <h2>Player 1</h2>
-        <div class="score">{{ player1 }}</div>
-        <button @click="addPoint(1)" :disabled="gameOver">+1</button>
-      </div>
+      <PlayerPanel
+        name="Player 1"
+        :score="player1"
+        :disabled="gameOver"
+        @add-point="addPoint(1)"
+      />
 
-      <div class="player">
-        <h2>Player 2</h2>
-        <div class="score">{{ player2 }}</div>
-        <button @click="addPoint(2)" :disabled="gameOver">+1</button>
-      </div>
+      <PlayerPanel
+        name="Player 2"
+        :score="player2"
+        :disabled="gameOver"
+        @add-point="addPoint(2)"
+      />
     </section>
 
     <!-- Status message -->
@@ -28,12 +30,10 @@
 </template>
 
 <script>
-/*
-- reactive data (player1, player2)
-- methods placeholders (addPoint, resetGame)
-*/
+import PlayerPanel from "./components/PlayerPanel.vue"
 export default {
   name: "App",
+  components: { PlayerPanel },
 
   data() {
     return {
@@ -105,24 +105,6 @@ export default {
   margin: 12px 0;
 }
 
-.player {
-  padding: 16px;
-}
-
-.score {
-  font-size: 62px;
-  font-weight: 700;
-  margin: 14px 0;
-}
-
-button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background-color: rgb(253, 253, 253);
-}
-
 .status {
   margin: 12px 0 20px;
   min-height: 24px;
@@ -132,8 +114,4 @@ button {
   margin-top: 6px;
 }
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 </style>
