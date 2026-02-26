@@ -91,27 +91,50 @@ export default {
 
 <style scoped>
 .app {
-  max-width: 30%;
+  max-width: 420px;
   margin: 40px auto;
   padding: 24px;
   background-color: rgb(236, 236, 236);
-  border-radius: 16px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #f2f4f8, #e8ecf2);
+  margin: 0;
 }
 
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 12px 0;
+  margin: 16px 0;
 }
 
 .status {
-  margin: 12px 0 20px;
+  margin: 18px 0 24px;
   min-height: 24px;
 }
 
 .reset {
   margin-top: 6px;
+}
+
+.reset:hover {
+  background-color: rgb(252, 192, 80);
+  color: white;
+}
+
+button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #fbfcff;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 </style>

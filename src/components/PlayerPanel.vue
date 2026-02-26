@@ -27,11 +27,21 @@ export default {
 <style scoped>
 .player {
   padding: 16px;
+  border-radius: 16px;
 }
+
+h2 {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+}
+
 .score {
   font-size: 62px;
   font-weight: 700;
   margin: 14px 0;
+  color: #1f2937;
+
 }
 
 button {
@@ -39,11 +49,17 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: rgb(253, 253, 253);
+  background-color: #fbfcff;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: rgb(69, 165, 69);
+  color: white;
 }
 </style>
